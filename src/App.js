@@ -18,6 +18,7 @@ class App extends Component {
       ]
     };
     this.getStyles = this.getStyles.bind(this);
+    this.addOne = this.addOne.bind(this);
   };
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class App extends Component {
           {key: 'g'},
         ]
       });
-    },500);
+    },1500);
   };
 
   render() {
@@ -40,12 +41,12 @@ class App extends Component {
         styles={this.getStyles()}
       >
         {interpolatedStyles => {
-          console.log('interpolatedStyles',interpolatedStyles);
           return (
-            <div onClick={this.addOne} style={{display:'flex'}}>
+            <div style={{display:'flex'}}>
               {interpolatedStyles.map(config => {
                 return (
                   <div
+                    onClick={this.addOne}
                     key={config.key}
                     style={{
                       ...config.style,
@@ -62,7 +63,9 @@ class App extends Component {
   };
 
   addOne() {
-    
+    this.setState(this.state.items.concat({
+      key:Math.floor(Math.random() * 1000)
+    }));
   };
 
   getStyles() {
