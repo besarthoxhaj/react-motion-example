@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { TransitionMotion, spring } from 'react-motion';
+import { TransitionMotion, spring, presets } from 'react-motion';
+import * as R from 'ramda';
 import logo from './logo.svg';
 import './App.css';
 
@@ -10,13 +11,9 @@ class App extends Component {
       items: [
         {key: 'a'},
         {key: 'b'},
-        {key: 'c'},
-        {key: 'd'},
-        {key: 'e'},
-        {key: 'f'},
-        {key: 'g'},
       ]
     };
+    this.getDefaultStyles = this.getDefaultStyles.bind(this);
     this.getStyles = this.getStyles.bind(this);
     this.addOne = this.addOne.bind(this);
   };
@@ -26,18 +23,16 @@ class App extends Component {
       this.setState({
         items: [
           {key: 'a'},
-          {key: 'c'},
-          {key: 'd'},
-          {key: 'g'},
         ]
       });
-    },1500);
+    },1000);
   };
 
   render() {
     return (
       <TransitionMotion
         willLeave={this.willLeave}
+        willEnter={this.willEnter}
         styles={this.getStyles()}
       >
         {interpolatedStyles => {
@@ -50,7 +45,7 @@ class App extends Component {
                     key={config.key}
                     style={{
                       ...config.style,
-                      backgroundColor: 'red',
+                      backgroundColor:'red',
                     }}
                   >{config.key}</div>
                 );
@@ -63,9 +58,11 @@ class App extends Component {
   };
 
   addOne() {
-    this.setState(this.state.items.concat({
-      key:Math.floor(Math.random() * 1000)
-    }));
+    this.setState({
+      items: R.prepend({
+        key:Math.floor(Math.random() * 1000)
+      }, this.state.items)
+    });
   };
 
   getStyles() {
@@ -74,11 +71,25 @@ class App extends Component {
       return {
         ...elm,
         style: {
-          margin:5,
+          margin: spring(5),
+          height: 100,
+          width: spring(100),
+          opacity: 1,
+        }
+      };
+    });
+  };
+
+  getDefaultStyles() {
+    const {items} = this.state;
+    return items.map(elm => {
+      return {
+        ...elm,
+        style: {
+          margin:spring(5),
           height:100,
-          width:100,
-          backgroundColor:'red',
-          opacity:1,
+          width:spring(100),
+          opacity:spring(1),
         }
       };
     });
@@ -90,6 +101,15 @@ class App extends Component {
       height: 100,
       margin: spring(0),
       opacity: spring(0),
+    };
+  };
+
+  willEnter() {
+    return {
+      width: 0,
+      height: 0,
+      margin: 0,
+      opacity: 0,
     };
   };
 }
