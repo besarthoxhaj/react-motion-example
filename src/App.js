@@ -71,10 +71,11 @@ class App extends Component {
       return {
         ...elm,
         style: {
-          margin: spring(5),
+          marginLeft: spring(5),
+          marginRight: spring(5),
           height: 100,
           width: spring(100),
-          opacity: 1,
+          opacity: spring(1),
         }
       };
     });
@@ -86,10 +87,11 @@ class App extends Component {
       return {
         ...elm,
         style: {
-          margin:spring(5),
-          height:100,
-          width:spring(100),
-          opacity:spring(1),
+          marginLeft: spring(5),
+          marginRight: spring(5),
+          height: 100,
+          width: spring(100),
+          opacity: spring(1),
         }
       };
     });
@@ -99,7 +101,8 @@ class App extends Component {
     return {
       width: spring(0),
       height: 100,
-      margin: spring(0),
+      marginLeft: spring(0),
+      marginRight: spring(0),
       opacity: spring(0),
     };
   };
@@ -108,7 +111,8 @@ class App extends Component {
     return {
       width: 0,
       height: 0,
-      margin: 0,
+      marginLeft: 0,
+      marginRight: 0,
       opacity: 0,
     };
   };
