@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { TransitionMotion, spring, presets } from 'react-motion';
 import * as R from 'ramda';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
+class Demo extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -34,6 +33,7 @@ class App extends Component {
         willLeave={this.willLeave}
         willEnter={this.willEnter}
         styles={this.getStyles()}
+        defaultStyles={this.getDefaultStyles()}
       >
         {interpolatedStyles => {
           return (
@@ -87,11 +87,11 @@ class App extends Component {
       return {
         ...elm,
         style: {
-          marginLeft: spring(5),
-          marginRight: spring(5),
+          marginLeft: 0,
+          marginRight: 0,
           height: 100,
-          width: spring(100),
-          opacity: spring(1),
+          width: 0,
+          opacity: 0,
         }
       };
     });
@@ -118,4 +118,4 @@ class App extends Component {
   };
 }
 
-export default App;
+ReactDOM.render(<Demo />, document.querySelector('#content'));
