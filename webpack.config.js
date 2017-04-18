@@ -22,6 +22,7 @@ var entry = {
   '00-simple-transition': './demos/00-simple-transition/index.js',
   '01-appear-disappear': './demos/01-appear-disappear/index.js',
   '02-carousel-simple': './demos/02-carousel-simple/index.js',
+  '03-carousel-lazy': './demos/03-carousel-lazy/index.js',
 };
 
 if (process.env.NODE_ENV === 'development') {
