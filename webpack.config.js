@@ -10,7 +10,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 var loaders = ['babel'];
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4040;
 
 var devtool;
 var plugins = [
